@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Python Web Application</title>
+</head>
+
+<body>
+    <div>
+        <p>
+            Welcome to my website! - the time is {{ utc_dt }}
+        </p>
+        <input type="text" />
+        <button>make prediction</button>
+
+    </div>
+</body>
+<script>
+    const inputField = document.querySelector("input")
+    const btn = document.querySelector("button")
+    const output = document.querySelector("p")
+    btn.addEventListener("click", (e) => {
+        console.log(inputField.value)
+
+        fetch("/predict?query=" + inputField.value)
+            .then(res => res.json())
+            .then(res => output.innerText = res.predictionResponse)
+            .then(res => btn.innerText = "make prediction")
+    })
+</script>
+
+</html>
